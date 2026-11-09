@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f0f5ff">
+  <meta name="description" content="Интерактивный тест по биологии: фагоциты и иммунитет. 15 вопросов для школьников 12–15 лет.">
+  <title>Миссия «Иммунитет» — интерактивный тест по фагоцитам</title>
+  <style>
+    :root{--ink:#162344;--muted:#65728e;--primary:#5b58e8;--primary-deep:#443bc5;--pale:#f5f7ff;--line:#e5e9f5;--good:#19856a;--bad:#c84665;--accent:#00b7bd;--card:#ffffff;--shadow:0 18px 60px rgba(49,60,124,.10)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;background:radial-gradient(circle at 8% 5%,#e4e1ff 0,transparent 28%),radial-gradient(circle at 92% 88%,#d4f7f4 0,transparent 34%),#f4f7fc;color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.5}
+    button{font:inherit;cursor:pointer}
+    button:focus-visible,.choice:focus-visible{outline:3px solid #ffb846;outline-offset:3px}
+    .shell{width:min(980px,calc(100% - 36px));margin:0 auto;padding:26px 0 45px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.01em;font-size:16px}
+    .brandmark{display:inline-grid;place-items:center;width:42px;height:42px;background:#fff;border:1px solid #e6e7fc;border-radius:15px;box-shadow:0 8px 25px #7774ec1f;font-size:24px}
+    .pill{font-size:12px;font-weight:800;letter-spacing:.02em;color:#4749a8;background:#eaeaff;border:1px solid #dcdafa;padding:8px 12px;border-radius:99px}
+    .card{background:var(--card);border:1px solid #e7eaf5;box-shadow:var(--shadow);border-radius:26px;overflow:hidden}
+    .hero{display:grid;grid-template-columns:1.18fr .82fr;min-height:445px}
+    .hero-copy{padding:clamp(25px,5vw,54px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+    .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:900;color:#5855c9;margin:0 0 14px}
+    h1{font-size:clamp(34px,5.7vw,57px);line-height:1.08;letter-spacing:-.045em;margin:0 0 19px}
+    .lead{font-size:17px;color:var(--muted);max-width:490px;margin:0 0 20px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:25px}
+    .chip{background:#f3f4ff;color:#474a9c;padding:7px 10px;border-radius:10px;font-weight:750;font-size:13px}
+    .btn{border:0;border-radius:14px;padding:13px 21px;font-weight:850;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:49px;transition:transform .15s,background .15s,box-shadow .15s}
+    .btn:hover:not(:disabled){transform:translateY(-1px)}
+    .btn:disabled{opacity:.45;cursor:not-allowed}
+    .btn-primary{background:var(--primary);color:white;box-shadow:0 8px 20px #5954d446}
+    .btn-primary:hover:not(:disabled){background:var(--primary-deep)}
+    .btn-secondary{color:#3c4587;background:#edf0ff}
+    .btn-outline{color:#4e5685;background:#fff;border:1px solid #dfe4f3}
+    .hero-art{position:relative;min-height:330px;display:grid;place-items:center;background:linear-gradient(155deg,#e5e9ff,#d5f8f5);overflow:hidden}
+    .hero-art:before,.hero-art:after{content:"";position:absolute;border:2px solid #ffffff80;border-radius:50%;width:380px;height:380px;transform:translate(30px,35px)}
+    .hero-art:after{width:260px;height:260px;transform:translate(80px,-50px)}
+    .cell{width:220px;height:220px;border-radius:44% 56% 61% 39%/48% 38% 62% 52%;position:relative;background:radial-gradient(circle at 31% 23%,#fff9,transparent 25%),radial-gradient(circle at 56% 70%,#797ae5aa,transparent 55%),linear-gradient(140deg,#a9aaff,#8276ee 70%,#6058c6);box-shadow:inset -15px -19px 35px #403eaa66,inset 12px 12px 30px #ffffffbd,0 24px 42px #5955c65b;transform:rotate(-9deg);animation:bob 5s ease-in-out infinite;z-index:1}
+    .cell:before,.cell:after{content:"";position:absolute;background:#b0aaff;border-radius:50%;box-shadow:inset -4px -6px 7px #6458c970, inset 5px 7px 10px #fff8}
+    .cell:before{width:66px;height:64px;left:-20px;top:53px}.cell:after{width:71px;height:64px;right:-20px;bottom:37px}
+    .nucleus{position:absolute;inset:50px 40px 54px 43px;border-radius:53% 47% 44% 56%;background:radial-gradient(circle at 30% 20%,#d7b9ff,#6442ac 68%,#442a7c);box-shadow:inset -6px -5px 10px #3b206087,0 2px 15px #55429355;transform:rotate(26deg)}
+    .nucleus:before,.nucleus:after{content:"";position:absolute;background:#7551b6;border:8px solid #a980e1;border-radius:50%;width:58px;height:57px}.nucleus:before{left:-16px;top:38px}.nucleus:after{right:-23px;top:41px}
+    .granule{position:absolute;width:9px;height:9px;background:#e0d8ff;border-radius:50%;box-shadow:0 1px 4px #41357b70}
+    .bacterium{position:absolute;width:66px;height:25px;background:linear-gradient(135deg,#fcda83,#f6a75c);border-radius:40px;box-shadow:inset -4px -5px 7px #cf6c4880,0 7px 15px #ac6b3670;transform:rotate(-35deg);z-index:2}
+    .bacterium:before{content:"";position:absolute;inset:-8px;border:3px dotted #e29f50;border-radius:40px}
+    .b1{top:19%;right:9%}.b2{bottom:17%;left:7%;transform:rotate(35deg) scale(.65)}
+    .art-label{position:absolute;z-index:3;bottom:28px;right:24px;font-weight:850;font-size:13px;padding:10px 14px;background:#ffffffdd;border:1px solid #fff;border-radius:14px;box-shadow:0 7px 19px #7a87b52c}
+    .smallprint{text-align:center;color:var(--muted);font-size:13px;margin:17px 0 0}
+    @keyframes bob{0%,100%{transform:translateY(0) rotate(-9deg)}50%{transform:translateY(-13px) rotate(-3deg)}}
+    .quiz{padding:clamp(20px,4.2vw,42px)}
+    .quiz-head{display:flex;align-items:start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .overline{color:#656aaa;font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:.1em}
+    .muted{color:var(--muted)}
+    .progress-wrapper{margin:22px 0 30px}
+    .progress-stats{display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:800;color:#5c6585;margin-bottom:10px}
+    .progress{background:#e9ecf8;height:12px;border-radius:20px;overflow:hidden}
+    .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .3s ease;border-radius:20px}
+    .question-title{font-size:clamp(23px,3.6vw,33px);letter-spacing:-.025em;line-height:1.22;margin:0 0 24px}
+    .answers{display:grid;gap:12px}
+    .choice{position:relative;width:100%;border:2px solid #e7eaf5;background:#fafbff;text-align:left;border-radius:16px;display:flex;align-items:center;gap:13px;padding:14px 16px;min-height:67px;color:#283555;transition:all .17s}
+    .choice:hover:not(:disabled){border-color:#b4b3f3;background:#f3f2ff}
+    .choice:disabled{cursor:default}
+    .choice.selected{border-color:#7064ec;background:#f0efff;box-shadow:0 0 0 2px #c9c5ff60}
+    .letter{display:grid;place-items:center;border-radius:10px;font-size:13px;font-weight:900;background:#edf0fa;color:#565c84;width:35px;height:35px;flex-shrink:0}
+    .choice.selected .letter{background:#655bea;color:#fff}
+    .choice-text{font-weight:650;font-size:15px}
+    .choice .check{margin-left:auto;color:#6155d9;font-size:21px;display:none}
+    .choice.selected .check{display:inline}
+    .quiz-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:22px;margin-top:30px}
+    .quiz-footer .right{display:flex;gap:8px;flex-wrap:wrap}
+    .nav-note{font-size:12px;color:#79819a}
+    .question-dots{display:flex;flex-wrap:wrap;gap:7px;margin-top:25px;align-items:center}
+    .qdot{height:25px;min-width:25px;border-radius:8px;border:1px solid #dee3f1;background:#f3f5fd;color:#6f7998;font-size:11px;font-weight:850;display:grid;place-items:center;padding:0 4px}
+    .qdot.active{border:2px solid var(--primary);color:#4a3acc;background:#eeedff}
+    .qdot.done{background:#d9f4ef;border-color:#b5eadd;color:#167f68}
+    .results-header{text-align:center;padding:4px 0 25px}
+    .medal{width:77px;height:77px;border-radius:25px;background:linear-gradient(145deg,#fff4be,#ffd576);display:grid;place-items:center;margin:0 auto 18px;font-size:38px;box-shadow:0 9px 25px #c68e3230}
+    .score{font-size:clamp(48px,8vw,73px);line-height:1;font-weight:950;letter-spacing:-.06em;color:var(--primary);margin:8px 0}
+    .grade{display:inline-flex;background:#e9f7f4;color:#187f68;border-radius:99px;padding:8px 14px;font-weight:850}
+    .review{margin-top:25px;border-top:1px solid var(--line);padding-top:23px}
+    .review h3{margin:0 0 16px;font-size:22px}
+    .review-item{border:1px solid var(--line);border-radius:15px;padding:16px;margin-bottom:10px;background:#fcfdff}
+    .review-top{display:flex;gap:9px;align-items:start;margin-bottom:8px;font-weight:850}
+    .status{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;width:23px;height:23px;flex-shrink:0;font-size:12px}
+    .status.good{color:#fff;background:var(--good)}.status.bad{color:#fff;background:var(--bad)}
+    .review-item p{margin:5px 0;color:#5f6881;font-size:14px}
+    .review-item strong{color:#27335b}
+    .hidden{display:none!important}
+    .result-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 0}
+    .disclaimer{font-size:12px;color:#8790a8;line-height:1.5;margin-top:20px;text-align:center}
+    @media(max-width:700px){.hero{grid-template-columns:1fr}.hero-copy{order:2}.hero-art{min-height:280px;order:1}.cell{transform:scale(.83);animation:none}.b1{right:16%}.quiz-footer .right{width:100%;justify-content:flex-end}.quiz-footer .btn{padding:12px 14px}.topbar{align-items:center}.pill{font-size:11px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+    @media print{body{background:#fff}.shell{width:100%}.card{box-shadow:none;border:none}.topbar,.result-actions,.question-dots,.quiz-footer,.smallprint{display:none!important}.review-item{break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <div class="brand"><span class="brandmark" aria-hidden="true">🦠</span> Биология без скуки</div>
+      <span class="pill">Для 12–15 лет</span>
+    </div>
+
+    <section class="card hero" id="welcome" aria-labelledby="welcome-title">
+      <div class="hero-copy">
+        <div class="eyebrow">Интерактивный тест по биологии</div>
+        <h1 id="welcome-title">Миссия:<br>«Иммунитет»</h1>
+        <p class="lead">Узнай, как фагоциты защищают наш организм. Ответь на вопросы и получи результат с объяснениями!</p>
+        <div class="chips"><span class="chip">🧠 15 вопросов</span><span class="chip">🎯 1 верный ответ</span><span class="chip">📚 Разбор ошибок</span></div>
+        <button class="btn btn-primary" id="startBtn">Начать тест <span aria-hidden="true">→</span></button>
+      </div>
+      <div class="hero-art" role="img" aria-label="Стилизованная объёмная клетка-фагоцит рядом с бактериями">
+        <div class="bacterium b1"></div><div class="bacterium b2"></div>
+        <div class="cell"><div class="nucleus"></div><i class="granule" style="top:22%;left:28%"></i><i class="granule" style="top:30%;right:22%"></i><i class="granule" style="bottom:25%;left:25%"></i><i class="granule" style="bottom:18%;right:27%"></i></div>
+        <div class="art-label">🔬 На страже здоровья!</div>
+      </div>
+    </section>
+
+    <section class="card quiz hidden" id="quiz" aria-labelledby="questionTitle">
+      <div class="quiz-head"><div class="overline" id="questionCounter">Вопрос 1 из 15</div><span class="pill" id="answerCounter">Отвечено: 0 / 15</span></div>
+      <div class="progress-wrapper"><div class="progress-stats"><span>Прогресс теста</span><span id="progressPct">0%</span></div><div class="progress" role="progressbar" aria-label="Доля вопросов с ответами" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressbar"><div class="progress-fill" id="progressFill"></div></div></div>
+      <h2 class="question-title" id="questionTitle"></h2>
+      <div class="answers" id="answerChoices" role="group" aria-labelledby="questionTitle"></div>
+      <div class="question-dots" id="questionDots" aria-label="Навигация по вопросам"></div>
+      <div class="quiz-footer">
+        <button class="btn btn-outline" id="prevBtn">← Назад</button>
+        <div class="right"><button class="btn btn-secondary" id="nextBtn">Далее →</button><button class="btn btn-primary hidden" id="finishBtn">Проверить ответы ✓</button></div>
+      </div>
+      <div class="nav-note" id="quizNotice" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="card quiz hidden" id="result" aria-labelledby="resultTitle">
+      <div class="results-header">
+        <div class="medal" id="medal" aria-hidden="true">🏆</div>
+        <div class="eyebrow">Миссия завершена</div>
+        <h2 id="resultTitle" class="question-title" style="margin-bottom:12px">Твой результат</h2>
+        <div class="score" id="scoreLabel" aria-live="polite"></div>
+        <div class="grade" id="gradeLabel"></div>
+        <p class="muted" id="resultMessage"></p>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="retryBtn">🔁 Пройти ещё раз</button>
+        <button class="btn btn-secondary" id="printBtn">🖨️ Распечатать результат</button>
+      </div>
+      <div class="review"><h3>Разбор ответов</h3><div id="reviewList"></div></div>
+    </section>
+    <p class="smallprint">Работает без интернета · Без регистрации · Ответы не отправляются на сервер</p>
+  </main>
+
+  <script>
+  'use strict';
+  const questions = [
+    {q:'Что такое фагоциты?',a:['Клетки, переносящие кислород','Клетки, поглощающие и уничтожающие чужеродные частицы','Вещества, ускоряющие химические реакции','Клетки, образующие костную ткань'],correct:1,explain:'Фагоциты способны захватывать микробы и другие частицы, а затем переваривать их.'},
+    {q:'Как называется процесс поглощения клеткой крупных частиц?',a:['Фотосинтез','Осмос','Фагоцитоз','Диффузия'],correct:2,explain:'Фагоцитоз — поглощение клеткой сравнительно крупных частиц.'},
+    {q:'Какой учёный разработал фагоцитарную теорию иммунитета?',a:['Илья Мечников','Дмитрий Менделеев','Чарльз Дарвин','Исаак Ньютон'],correct:0,explain:'Илья Ильич Мечников разработал фагоцитарную теорию иммунитета.'},
+    {q:'Какие клетки часто одними из первых прибывают к месту бактериальной инфекции?',a:['Эритроциты','Нейроны','Тромбоциты','Нейтрофилы'],correct:3,explain:'Нейтрофилы быстро перемещаются к месту инфекции и уничтожают бактерии.'},
+    {q:'Какую роль играют лизосомы в фагоцитах?',a:['Переносят кислород','Содержат ферменты для расщепления веществ','Хранят наследственную информацию','Вырабатывают электрические импульсы'],correct:1,explain:'Лизосомы содержат ферменты, участвующие в переваривании поглощённого материала.'},
+    {q:'Что такое псевдоподии (ложноножки)?',a:['Выросты клетки, помогающие движению и захвату частиц','Части клеточного ядра','Особые бактерии','Молекулы антител'],correct:0,explain:'Псевдоподии — временные выросты цитоплазмы, с помощью которых клетка может захватывать частицы.'},
+    {q:'Как называется пузырёк, образующийся внутри клетки при захвате бактерии?',a:['Митохондрия','Рибосома','Фагосома','Хромосома'],correct:2,explain:'Фагосома содержит захваченную частицу и может сливаться с лизосомой.'},
+    {q:'Что образуется при слиянии фагосомы с лизосомой?',a:['Хлоропласт','Фаголизосома','Ядрышко','Клеточная стенка'],correct:1,explain:'В фаголизосоме происходит уничтожение и расщепление поглощённого материала.'},
+    {q:'Что такое хемотаксис?',a:['Деление клетки','Образование антител','Выработка энергии','Направленное движение клетки под действием химических сигналов'],correct:3,explain:'Химические сигналы могут привлекать фагоциты к очагу инфекции.'},
+    {q:'Какие клетки крови могут выходить в ткани и превращаться в макрофаги?',a:['Эритроциты','Тромбоциты','Моноциты','B-лимфоциты'],correct:2,explain:'Моноциты крови способны дифференцироваться в макрофаги.'},
+    {q:'К какой системе защиты прежде всего относится фагоцитоз?',a:['К врождённому иммунитету','К пищеварительной системе','К системе кровообращения','К эндокринной системе'],correct:0,explain:'Фагоцитоз является одним из основных механизмов врождённого иммунитета.'},
+    {q:'Какую дополнительную функцию выполняют макрофаги?',a:['Производят гемоглобин','Создают нервные импульсы','Вырабатывают желчь','Представляют антигены Т-лимфоцитам'],correct:3,explain:'Макрофаги могут представлять антигены и помогать запускать приобретённый иммунный ответ.'},
+    {q:'Что может входить в состав гноя при бактериальной инфекции?',a:['Только живые бактерии','Погибшие нейтрофилы, клеточные остатки и жидкость','Только эритроциты','Только антитела'],correct:1,explain:'Гной нередко содержит погибшие нейтрофилы, остатки разрушенных тканей и микроорганизмы.'},
+    {q:'Почему фагоциты важны для заживления тканей?',a:['Они превращаются в кости','Они переносят кислород вместо эритроцитов','Они удаляют повреждённые клетки и помогают регулировать воспаление','Они создают кожный пигмент'],correct:2,explain:'Макрофаги очищают повреждённую ткань и участвуют в восстановительных процессах.'},
+    {q:'Что произойдёт, если некоторые бактерии смогут выживать внутри фагоцитов?',a:['Инфекция может сохраняться, несмотря на поглощение бактерий','Все бактерии немедленно погибнут','Фагоциты превратятся в эритроциты','Иммунитет перестанет существовать'],correct:0,explain:'Некоторые возбудители способны противостоять уничтожению внутри фагоцитов, что затрудняет борьбу с инфекцией.'}
+  ];
+  const letters = ['А','Б','В','Г'];
+  const $ = id => document.getElementById(id);
+  let current = 0;
+  let answers = Array(questions.length).fill(null);
+  const screens = ['welcome','quiz','result'];
+  function showScreen(id){screens.forEach(s=>$(s).classList.toggle('hidden',s!==id));window.scrollTo({top:0,behavior:'instant'});}
+  function begin(){current=0;answers=Array(questions.length).fill(null);renderQuestion();showScreen('quiz');}
+  function renderQuestion(){
+    const question=questions[current];
+    $('questionCounter').textContent=`Вопрос ${current+1} из ${questions.length}`;
+    $('questionTitle').textContent=question.q;
+    const choices=$('answerChoices');choices.replaceChildren();
+    question.a.forEach((answer,i)=>{
+      const btn=document.createElement('button');btn.type='button';btn.className='choice'+(answers[current]===i?' selected':'');
+      btn.setAttribute('aria-pressed',String(answers[current]===i));
+      const l=document.createElement('span');l.className='letter';l.textContent=letters[i];
+      const t=document.createElement('span');t.className='choice-text';t.textContent=answer;
+      const c=document.createElement('span');c.className='check';c.textContent='✓';c.setAttribute('aria-hidden','true');
+      btn.append(l,t,c);btn.addEventListener('click',()=>{answers[current]=i;renderQuestion();});choices.appendChild(btn);
+    });
+    const answered=answers.filter(x=>x!==null).length;
+    const pct=Math.round(answered/questions.length*100);
+    $('answerCounter').textContent=`Отвечено: ${answered} / ${questions.length}`;
+    $('progressPct').textContent=`${pct}%`;
+    $('progressFill').style.width=`${pct}%`;
+    $('progressbar').setAttribute('aria-valuenow',String(pct));
+    $('prevBtn').disabled=current===0;
+    $('nextBtn').classList.toggle('hidden',current===questions.length-1);
+    $('finishBtn').classList.toggle('hidden',current!==questions.length-1);
+    $('finishBtn').disabled=answered!==questions.length;
+    $('quizNotice').textContent=current===questions.length-1&&answered!==questions.length?`Ответь на оставшиеся ${questions.length-answered} вопросов, чтобы завершить тест.`:'Можно вернуться и изменить любой ответ до проверки.';
+    const dots=$('questionDots');dots.replaceChildren();
+    questions.forEach((_,i)=>{const dot=document.createElement('button');dot.type='button';dot.className='qdot'+(answers[i]!==null?' done':'')+(i===current?' active':'');dot.textContent=String(i+1);dot.title=`Перейти к вопросу ${i+1}`;dot.setAttribute('aria-label',`Вопрос ${i+1}${answers[i]!==null?', отвечен':''}`);dot.setAttribute('aria-current',i===current?'step':'false');dot.addEventListener('click',()=>goTo(i));dots.appendChild(dot);});
+  }
+  function goTo(i){if(i<0||i>=questions.length)return;current=i;renderQuestion();window.scrollTo({top:0,behavior:'smooth'});}
+  function finish(){if(answers.some(x=>x===null))return;
+    const score=questions.reduce((s,q,i)=>s+(answers[i]===q.correct?1:0),0);
+    const grade=score>=14?5:score>=11?4:score>=8?3:2;
+    const message=score>=14?'Отлично! Ты настоящий эксперт по фагоцитам!':score>=11?'Очень хорошо! Ты отлично разбираешься в теме.':score>=8?'Хороший результат! Осталось повторить некоторые детали.':'Потренируйся ещё немного — объяснения ниже помогут разобраться.';
+    $('scoreLabel').textContent=`${score} / ${questions.length}`;
+    $('gradeLabel').textContent=`Школьная оценка: ${grade} · ${Math.round(score/questions.length*100)}%`;
+    $('medal').textContent=score>=14?'🏆':score>=11?'🥇':score>=8?'⭐':'🧠';
+    $('resultMessage').textContent=message;
+    const review=$('reviewList');review.replaceChildren();
+    questions.forEach((q,i)=>{
+      const good=answers[i]===q.correct;
+      const article=document.createElement('article');article.className='review-item';
+      const top=document.createElement('div');top.className='review-top';
+      const status=document.createElement('span');status.className='status '+(good?'good':'bad');status.textContent=good?'✓':'✕';status.setAttribute('aria-label',good?'Верно':'Ошибка');
+      const title=document.createElement('span');title.textContent=`${i+1}. ${q.q}`;top.append(status,title);article.appendChild(top);
+      const response=document.createElement('p');response.textContent=`Твой ответ: ${q.a[answers[i]]}`;article.appendChild(response);
+      if(!good){const correct=document.createElement('p');const strong=document.createElement('strong');strong.textContent=`Правильный ответ: ${q.a[q.correct]}`;correct.appendChild(strong);article.appendChild(correct);}
+      const explanation=document.createElement('p');explanation.textContent=`💡 ${q.explain}`;article.appendChild(explanation);review.appendChild(article);
+    });
+    showScreen('result');
+  }
+  $('startBtn').addEventListener('click',begin);
+  $('prevBtn').addEventListener('click',()=>goTo(current-1));
+  $('nextBtn').addEventListener('click',()=>goTo(current+1));
+  $('finishBtn').addEventListener('click',finish);
+  $('retryBtn').addEventListener('click',begin);
+  $('printBtn').addEventListener('click',()=>window.print());
+  </script>
+</body>
+</html>
